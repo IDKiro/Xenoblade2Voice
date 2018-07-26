@@ -1,10 +1,10 @@
 # 异度神剑2战斗后语音查看程序
 
-### Introduction
+## Introduction
 
 根据选择的人物筛选并播放相关角色的战斗后语音
 
-### Feature
+## Feature
 
 1. 切换中文/日文
 2. 悬停在选项上可直接显示另一语言的文本
@@ -14,7 +14,7 @@
 6. 双击文本可以播放该文本的语音
 7. 支持常见的播放器操作
 
-### Instruction
+## Instruction
 
 #### 如何筛选对话组：
 
@@ -38,12 +38,13 @@
 
 1. 悬停在标题上可以查看本程序的staff
 
-### Development tools:
+## Development tools:
 
 Qt 5.9.3
+
 Visual Studio 2017
 
-### Developer
+## Developer
 
 #### 数据挖掘:
 
