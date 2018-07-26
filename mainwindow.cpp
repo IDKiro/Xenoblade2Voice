@@ -28,14 +28,21 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setFixedSize(this->geometry().width(),this->geometry().height());
 
 	QString fileName;
+	QString staff;
 	if (ui->radioButton_CN->isChecked())
 	{
 		fileName = "resource/icon/titlelogo_cn.png";
+		ui->reset->setText(u8"重置选择");
+		staff = u8"<html><head/><body><p>数据挖掘:</p><p>	@Moosehunter(Xenoblade Subreddit Discord)</p><p>对话听写与翻译:</p><p>	@vinsanityvc(NGA)</p><p>	@takamana(stage1st)</p><p>游戏内对话确认协助:</p><p>	@天天の幻想(Baidu Tieba: 异度之刃)</p><p>	@nanami_c(Baidu Tieba: 异度之刃)</p><p>	@黑礼帽的誓言(Baidu Tieba: 异度之刃)</p><p>主程序:</p><p>	@IDKiro(NS in ZJU QQ Group)</p><p>特别感谢:</p><p>	@TheKjozk(YouTube)</p><p>	Monolith Soft &amp; Nintendo</p></body></html>";
+		ui->graphicsView_title->setToolTip(staff);
 		//qDebug() << "Load CN title";
 	}
 	else
 	{
 		fileName = "resource/icon/titlelogo_jp.png";
+		ui->reset->setText(u8"リセット");
+		staff = u8"<html><head/><body><p>データマイニング:</p><p>	@Moosehunter(Xenoblade Subreddit Discord)</p><p>会話聞き取りと中国語翻訳:</p><p>	@vinsanityvc(NGA)</p><p>	@takamana(stage1st)</p><p>ゲーム内で会話確認の協力:</p><p>	@天天の幻想(Baidu Tieba: 异度之刃)</p><p>	@nanami_c(Baidu Tieba: 异度之刃)</p><p>	@黑礼帽的誓言(Baidu Tieba: 异度之刃)</p><p>プログラマー:</p><p>	@IDKiro(NS in ZJU QQ Group)</p><p>スペシャルサンクス:</p><p>	@TheKjozk(YouTube)</p><p>	Monolith Soft &amp; Nintendo</p></body></html>";
+		ui->graphicsView_title->setToolTip(staff);
 		//qDebug() << "Load JP title";
 	}
 
@@ -162,15 +169,32 @@ void MainWindow::on_remove_clicked()
 void MainWindow::on_repeat_clicked()
 {
 	QIcon icon;
-	repeat = !repeat;
-	if (repeat)
+
+	switch (repeat)
 	{
-		icon.addFile(tr("resource/icon/repeat_one.png"));
-	}
-	else
+	case 0:				//列表播放->列表循环
 	{
 		icon.addFile(tr("resource/icon/repeat.png"));
 		
+		repeat = 1;
+		break;
+	}
+	case 1:				//列表循环->单曲循环
+	{
+		icon.addFile(tr("resource/icon/repeat_one.png"));
+		repeat = 2;
+		break;
+	}
+	case 2:				//单曲循环->列表播放
+	{
+		icon.addFile(tr("resource/icon/reorder.png"));
+		repeat = 0;
+		break;
+	}
+	default:
+	{
+		break;
+	}
 	}
 	ui->repeat->setIcon(icon);
 }
@@ -212,9 +236,11 @@ void MainWindow::on_play_clicked()
 
 void MainWindow::on_forward_clicked()
 {   if(ui->listWidget->count() != 0)
-    if(repeat)
+    if(repeat == 2)
     {
-        repeat = !repeat;next();repeat = !repeat;
+        repeat = 0;
+		next();
+		repeat = 2;
     }
     else
     {
@@ -381,21 +407,35 @@ void MainWindow::next()
 {
     lCounter++;
 
-    if(repeat)
+    if(repeat == 2)
     {
         lCounter--;
     }
 
-    if(lCounter >= ui->listWidget->count())
-        lCounter = 0;
+	if (lCounter >= ui->listWidget->count())
+	{
+		lCounter = 0;
+	}
+        
 
     ui->listWidget->setCurrentRow(lCounter);
 
     ui->play->setChecked(false);
 
     loadTrack();
-    player->play();
 
+	if (lCounter == 0 && repeat == 0)
+	{
+		QIcon icon;
+
+		player->pause();
+		icon.addFile(tr("resource/icon/play.png"));
+		ui->play->setIcon(icon);
+	}
+	else
+	{
+		player->play();
+	}
 }
 
 void MainWindow::back()
@@ -426,6 +466,10 @@ void MainWindow::on_radioButton_CN_clicked()
 	QString fileName;
 
 	fileName = "resource/icon/titlelogo_cn.png";
+	ui->reset->setText(u8"重置选择");
+	QString staff;
+	staff = u8"<html><head/><body><p>数据挖掘:</p><p>	@Moosehunter(Xenoblade Subreddit Discord)</p><p>对话听写与翻译:</p><p>	@vinsanityvc(NGA)</p><p>	@takamana(stage1st)</p><p>游戏内对话确认协助:</p><p>	@天天の幻想(Baidu Tieba: 异度之刃)</p><p>	@nanami_c(Baidu Tieba: 异度之刃)</p><p>	@黑礼帽的誓言(Baidu Tieba: 异度之刃)</p><p>主程序:</p><p>	@IDKiro(NS in ZJU QQ Group)</p><p>特别感谢:</p><p>	@TheKjozk(YouTube)</p><p>	Monolith Soft &amp; Nintendo</p></body></html>";
+	ui->graphicsView_title->setToolTip(staff);
 	//qDebug() << "Load CN title";
 
 	QStringList sub2keys2 = textObj.keys();
@@ -443,6 +487,18 @@ void MainWindow::on_radioButton_CN_clicked()
 
 	int curRow = ui->listWidget->currentRow();
 	updateList();
+
+	for (int i = 0; i < sub2keys2.size(); i++)
+	{
+		if (textObj.contains(sub2keys2.at(i)))
+		{
+
+			QJsonObject sub3Obj2 = textObj.value(sub2keys2.at(i)).toObject();
+
+			ui->listWidget->item(i)->setToolTip(sub3Obj2["JP"].toString());
+		}
+	}
+
 	ui->listWidget->setCurrentRow(curRow);
 
 	QImage* img = new QImage;
@@ -492,6 +548,10 @@ void MainWindow::on_radioButton_JP_clicked()
 	QString fileName;
 
 	fileName = "resource/icon/titlelogo_jp.png";
+	ui->reset->setText(u8"リセット");
+	QString staff;
+	staff = u8"<html><head/><body><p>データマイニング:</p><p>	@Moosehunter(Xenoblade Subreddit Discord)</p><p>会話聞き取りと中国語翻訳:</p><p>	@vinsanityvc(NGA)</p><p>	@takamana(stage1st)</p><p>ゲーム内で会話確認の協力:</p><p>	@天天の幻想(Baidu Tieba: 异度之刃)</p><p>	@nanami_c(Baidu Tieba: 异度之刃)</p><p>	@黑礼帽的誓言(Baidu Tieba: 异度之刃)</p><p>プログラマー:</p><p>	@IDKiro(NS in ZJU QQ Group)</p><p>スペシャルサンクス:</p><p>	@TheKjozk(YouTube)</p><p>	Monolith Soft &amp; Nintendo</p></body></html>";
+	ui->graphicsView_title->setToolTip(staff);
 	//qDebug() << "Load JP title";
 
 	QStringList sub2keys2 = textObj.keys();
@@ -510,6 +570,18 @@ void MainWindow::on_radioButton_JP_clicked()
 
 	int curRow = ui->listWidget->currentRow();
 	updateList();
+
+	for (int i = 0; i < sub2keys2.size(); i++)
+	{
+		if (textObj.contains(sub2keys2.at(i)))
+		{
+
+			QJsonObject sub3Obj2 = textObj.value(sub2keys2.at(i)).toObject();
+
+			ui->listWidget->item(i)->setToolTip(sub3Obj2["CN"].toString());
+		}
+	}
+
 	ui->listWidget->setCurrentRow(curRow);
 
 	QImage* img = new QImage;
@@ -560,66 +632,226 @@ void MainWindow::on_listWidget_char_clicked(const QModelIndex &index)
 	QString curid, fileName;
 	switch (CGlobal::flag)
 	{
-		case 0:
+	case 0:
+	{
+		curRow = ui->listWidget_char->currentRow();
+		CGlobal::curid_1 = ui->listWidget_char->item(curRow)->whatsThis();
+
+		fileName = "resource/image/" + CGlobal::curid_1 + ".png";
+		QImage* img = new QImage;
+		if (!(img->load(fileName)))
 		{
-			curRow = ui->listWidget_char->currentRow();
-			CGlobal::curid_1 = ui->listWidget_char->item(curRow)->whatsThis();
+			//qDebug() << "Load failed";
+			delete img;
+			return;
+		}
+		QGraphicsScene *scene = new QGraphicsScene;
+		scene->addPixmap(QPixmap::fromImage(*img).scaled(90, 90));
+		ui->graphicsView_char_1->setScene(scene);
 
-			fileName = "resource/image/" + CGlobal::curid_1 + ".png";
-			QImage* img = new QImage;
-			if (!(img->load(fileName)))
+		//解析json
+		//读取json1
+		QFile loadFile("resource/json/jsonChara.json");
+
+		if (!loadFile.open(QIODevice::ReadOnly))
+		{
+			//qDebug() << "could't open projects json";
+			return;
+		}
+
+		QByteArray allData = loadFile.readAll();
+		loadFile.close();
+
+		QJsonParseError json_error;
+		QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &json_error));
+
+		if (json_error.error != QJsonParseError::NoError)
+		{
+			//qDebug() << "json error!";
+			return;
+		}
+
+		QJsonObject rootObj = jsonDoc.object();
+
+		QStringList keys = rootObj.keys();
+
+		//开始处理json数据
+		if (rootObj.contains(CGlobal::curid_1))
+		{
+			QJsonObject subObj = rootObj.value(CGlobal::curid_1).toObject();	//读取当前角色的数据
+
+			//使不可对话的对象不可选择
+			if (subObj.contains("disabledChara"))
 			{
-				//qDebug() << "Load failed";
-				delete img;
-				return;
+				QJsonArray sub2Array = subObj.value("disabledChara").toArray();
+				//qDebug() << "disabledChara is:";
+				for (int j = 0; j < sub2Array.size(); j++)
+				{
+					//qDebug() << j << " value is:" << sub2Array.at(j).toString();
+					for (int k = 0; k < keys.size(); k++)
+					{
+						curid = ui->listWidget_char->item(k)->whatsThis();
+						if (curid == sub2Array.at(j).toString())
+						{
+							ui->listWidget_char->item(k)->setFlags(ui->listWidget_char->item(k)->flags() & ~(Qt::ItemIsSelectable)); //设置该项为不可用
+							ui->listWidget_char->item(k)->setHidden(true);
+						}
+
+					}
+				}
 			}
-			QGraphicsScene *scene = new QGraphicsScene;
-			scene->addPixmap(QPixmap::fromImage(*img).scaled(90, 90));
-			ui->graphicsView_char_1->setScene(scene);
 
-			//解析json
-			//读取json1
-			QFile loadFile("resource/json/jsonChara.json");
+			//读取json2
+			QFile loadFile2("resource/json/jsonDialogue.json");
 
-			if (!loadFile.open(QIODevice::ReadOnly))
+			if (!loadFile2.open(QIODevice::ReadOnly))
 			{
 				//qDebug() << "could't open projects json";
 				return;
 			}
 
-			QByteArray allData = loadFile.readAll();
-			loadFile.close();
+			QByteArray allData2 = loadFile2.readAll();
+			loadFile2.close();
 
-			QJsonParseError json_error;
-			QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &json_error));
+			QJsonParseError json_error2;
+			QJsonDocument jsonDoc2(QJsonDocument::fromJson(allData2, &json_error2));
 
-			if (json_error.error != QJsonParseError::NoError)
+			if (json_error2.error != QJsonParseError::NoError)
 			{
 				//qDebug() << "json error!";
 				return;
 			}
 
-			QJsonObject rootObj = jsonDoc.object();
-
-			QStringList keys = rootObj.keys();
-
-			//开始处理json数据
-			if (rootObj.contains(CGlobal::curid_1))
+			//删除当前不可进行的对话组
+			if (subObj.contains("includedPattern"))
 			{
-				QJsonObject subObj = rootObj.value(CGlobal::curid_1).toObject();	//读取当前角色的数据
+				QJsonArray sub2Array = subObj.value("includedPattern").toArray();		//当前角色所包含的对话，删除不包含的listwidget中的项
+				QJsonObject rootObj2 = jsonDoc2.object();
 
-				//使不可对话的对象不可选择
-				if (subObj.contains("disabledChara"))
+				for (int i = ui->listWidget_talk->count()-1; i >= 0; i--)
 				{
-					QJsonArray sub2Array = subObj.value("disabledChara").toArray();
-					//qDebug() << "disabledChara is:";
+					int delflag = 1;
 					for (int j = 0; j < sub2Array.size(); j++)
 					{
-						//qDebug() << j << " value is:" << sub2Array.at(j).toString();
+						if (sub2Array.at(j).toString() == ui->listWidget_talk->item(i)->whatsThis())
+						{
+							delflag = 0;
+							break;
+						}
+					}
+					if (delflag)
+					{
+						ui->listWidget_talk->takeItem(i);	//删除该行
+					}
+					
+				}
+			}
+		}
+		//解析结束
+
+		CGlobal::flag = 1;
+
+		break;
+	}
+
+	case 1:
+	{
+		curRow = ui->listWidget_char->currentRow();
+
+		if (!(ui->listWidget_char->item(curRow)->flags() & (Qt::ItemIsSelectable)))
+		{
+			//qDebug() << "Can not select";
+			return;
+		}
+
+		CGlobal::curid_2 = ui->listWidget_char->item(curRow)->whatsThis();
+
+		fileName = "resource/image/" + CGlobal::curid_2 + ".png";
+		QImage* img = new QImage;
+		if (!(img->load(fileName)))
+		{
+			//qDebug() << "Load failed";
+			delete img;
+			return;
+		}
+		QGraphicsScene *scene = new QGraphicsScene;
+		scene->addPixmap(QPixmap::fromImage(*img).scaled(90, 90));
+		ui->graphicsView_char_2->setScene(scene);
+
+		
+		//解析json
+		//读取json1
+		QFile loadFile("resource/json/jsonChara.json");
+
+		if (!loadFile.open(QIODevice::ReadOnly))
+		{
+			//qDebug() << "could't open projects json";
+			return;
+		}
+
+		QByteArray allData = loadFile.readAll();
+		loadFile.close();
+
+		QJsonParseError json_error;
+		QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &json_error));
+
+		if (json_error.error != QJsonParseError::NoError)
+		{
+			//qDebug() << "json error!";
+			return;
+		}
+
+		QJsonObject rootObj = jsonDoc.object();
+
+		QStringList keys = rootObj.keys();
+
+		//开始处理json数据
+		if (rootObj.contains(CGlobal::curid_2))
+		{
+			QJsonObject subObj = rootObj.value(CGlobal::curid_2).toObject();	//读取当前角色的数据
+
+
+			//读取json3
+			QFile loadFile3("resource/json/jsonTwoChara.json");
+
+			if (!loadFile3.open(QIODevice::ReadOnly))
+			{
+				//qDebug() << "could't open projects json";
+				return;
+			}
+
+			QByteArray allData3 = loadFile3.readAll();
+			loadFile3.close();
+
+			QJsonParseError json_error3;
+			QJsonDocument jsonDoc3(QJsonDocument::fromJson(allData3, &json_error3));
+
+			if (json_error3.error != QJsonParseError::NoError)
+			{
+				//qDebug() << "json error!";
+				return;
+			}
+
+			QJsonObject rootObj3 = jsonDoc3.object();
+
+			QStringList keys3 = rootObj3.keys();
+
+
+			//使不可对话的对象不可选择
+			if (rootObj3.contains(CGlobal::curid_1))
+			{
+				QJsonObject subObj3 = rootObj3.value(CGlobal::curid_1).toObject();
+				if (subObj3.contains(CGlobal::curid_2))
+				{
+					QJsonArray sub2Array3 = subObj3.value(CGlobal::curid_2).toArray();
+					//qDebug() << "disabledChara is:";
+					for (int j = 0; j < sub2Array3.size(); j++)
+					{
+						//qDebug() << j << " value is:" << sub2Array3.at(j).toString();
 						for (int k = 0; k < keys.size(); k++)
 						{
 							curid = ui->listWidget_char->item(k)->whatsThis();
-							if (curid == sub2Array.at(j).toString())
+							if (curid == sub2Array3.at(j).toString())
 							{
 								ui->listWidget_char->item(k)->setFlags(ui->listWidget_char->item(k)->flags() & ~(Qt::ItemIsSelectable)); //设置该项为不可用
 								ui->listWidget_char->item(k)->setHidden(true);
@@ -628,333 +860,173 @@ void MainWindow::on_listWidget_char_clicked(const QModelIndex &index)
 						}
 					}
 				}
-
-				//读取json2
-				QFile loadFile2("resource/json/jsonDialogue.json");
-
-				if (!loadFile2.open(QIODevice::ReadOnly))
-				{
-					//qDebug() << "could't open projects json";
-					return;
-				}
-
-				QByteArray allData2 = loadFile2.readAll();
-				loadFile2.close();
-
-				QJsonParseError json_error2;
-				QJsonDocument jsonDoc2(QJsonDocument::fromJson(allData2, &json_error2));
-
-				if (json_error2.error != QJsonParseError::NoError)
-				{
-					//qDebug() << "json error!";
-					return;
-				}
-
-				//删除当前不可进行的对话组
-				if (subObj.contains("includedPattern"))
-				{
-					QJsonArray sub2Array = subObj.value("includedPattern").toArray();		//当前角色所包含的对话，删除不包含的listwidget中的项
-					QJsonObject rootObj2 = jsonDoc2.object();
-
-					for (int i = ui->listWidget_talk->count()-1; i >= 0; i--)
-					{
-						int delflag = 1;
-						for (int j = 0; j < sub2Array.size(); j++)
-						{
-							if (sub2Array.at(j).toString() == ui->listWidget_talk->item(i)->whatsThis())
-							{
-								delflag = 0;
-								break;
-							}
-						}
-						if (delflag)
-						{
-							ui->listWidget_talk->takeItem(i);	//删除该行
-						}
-						
-					}
-				}
-			}
-			//解析结束
-
-			CGlobal::flag = 1;
-
-			break;
-		}
-
-		case 1:
-		{
-			curRow = ui->listWidget_char->currentRow();
-
-			if (!(ui->listWidget_char->item(curRow)->flags() & (Qt::ItemIsSelectable)))
-			{
-				//qDebug() << "Can not select";
-				return;
 			}
 
-			CGlobal::curid_2 = ui->listWidget_char->item(curRow)->whatsThis();
+			//读取json2
+			QFile loadFile2("resource/json/jsonDialogue.json");
 
-			fileName = "resource/image/" + CGlobal::curid_2 + ".png";
-			QImage* img = new QImage;
-			if (!(img->load(fileName)))
-			{
-				//qDebug() << "Load failed";
-				delete img;
-				return;
-			}
-			QGraphicsScene *scene = new QGraphicsScene;
-			scene->addPixmap(QPixmap::fromImage(*img).scaled(90, 90));
-			ui->graphicsView_char_2->setScene(scene);
-
-			
-			//解析json
-			//读取json1
-			QFile loadFile("resource/json/jsonChara.json");
-
-			if (!loadFile.open(QIODevice::ReadOnly))
+			if (!loadFile2.open(QIODevice::ReadOnly))
 			{
 				//qDebug() << "could't open projects json";
 				return;
 			}
 
-			QByteArray allData = loadFile.readAll();
-			loadFile.close();
+			QByteArray allData2 = loadFile2.readAll();
+			loadFile2.close();
 
-			QJsonParseError json_error;
-			QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &json_error));
+			QJsonParseError json_error2;
+			QJsonDocument jsonDoc2(QJsonDocument::fromJson(allData2, &json_error2));
 
-			if (json_error.error != QJsonParseError::NoError)
+			if (json_error2.error != QJsonParseError::NoError)
 			{
 				//qDebug() << "json error!";
 				return;
 			}
 
-			QJsonObject rootObj = jsonDoc.object();
-
-			QStringList keys = rootObj.keys();
-
-			//开始处理json数据
-			if (rootObj.contains(CGlobal::curid_2))
+			//删除当前不可进行的对话组
+			if (subObj.contains("includedPattern"))
 			{
-				QJsonObject subObj = rootObj.value(CGlobal::curid_2).toObject();	//读取当前角色的数据
+				QJsonArray sub2Array = subObj.value("includedPattern").toArray();		//当前角色所包含的对话，删除不包含的listwidget中的项
+				QJsonObject rootObj2 = jsonDoc2.object();
 
-
-				//读取json3
-				QFile loadFile3("resource/json/jsonTwoChara.json");
-
-				if (!loadFile3.open(QIODevice::ReadOnly))
+				for (int i = ui->listWidget_talk->count() - 1; i >= 0; i--)
 				{
-					//qDebug() << "could't open projects json";
-					return;
-				}
-
-				QByteArray allData3 = loadFile3.readAll();
-				loadFile3.close();
-
-				QJsonParseError json_error3;
-				QJsonDocument jsonDoc3(QJsonDocument::fromJson(allData3, &json_error3));
-
-				if (json_error3.error != QJsonParseError::NoError)
-				{
-					//qDebug() << "json error!";
-					return;
-				}
-
-				QJsonObject rootObj3 = jsonDoc3.object();
-
-				QStringList keys3 = rootObj3.keys();
-
-
-				//使不可对话的对象不可选择
-				if (rootObj3.contains(CGlobal::curid_1))
-				{
-					QJsonObject subObj3 = rootObj3.value(CGlobal::curid_1).toObject();
-					if (subObj3.contains(CGlobal::curid_2))
+					int delflag = 1;
+					for (int j = 0; j < sub2Array.size(); j++)
 					{
-						QJsonArray sub2Array3 = subObj3.value(CGlobal::curid_2).toArray();
-						//qDebug() << "disabledChara is:";
-						for (int j = 0; j < sub2Array3.size(); j++)
+						if (sub2Array.at(j).toString() == ui->listWidget_talk->item(i)->whatsThis())
 						{
-							//qDebug() << j << " value is:" << sub2Array3.at(j).toString();
-							for (int k = 0; k < keys.size(); k++)
-							{
-								curid = ui->listWidget_char->item(k)->whatsThis();
-								if (curid == sub2Array3.at(j).toString())
-								{
-									ui->listWidget_char->item(k)->setFlags(ui->listWidget_char->item(k)->flags() & ~(Qt::ItemIsSelectable)); //设置该项为不可用
-									ui->listWidget_char->item(k)->setHidden(true);
-								}
-
-							}
+							delflag = 0;
+							break;
 						}
 					}
-				}
-
-				//读取json2
-				QFile loadFile2("resource/json/jsonDialogue.json");
-
-				if (!loadFile2.open(QIODevice::ReadOnly))
-				{
-					//qDebug() << "could't open projects json";
-					return;
-				}
-
-				QByteArray allData2 = loadFile2.readAll();
-				loadFile2.close();
-
-				QJsonParseError json_error2;
-				QJsonDocument jsonDoc2(QJsonDocument::fromJson(allData2, &json_error2));
-
-				if (json_error2.error != QJsonParseError::NoError)
-				{
-					//qDebug() << "json error!";
-					return;
-				}
-
-				//删除当前不可进行的对话组
-				if (subObj.contains("includedPattern"))
-				{
-					QJsonArray sub2Array = subObj.value("includedPattern").toArray();		//当前角色所包含的对话，删除不包含的listwidget中的项
-					QJsonObject rootObj2 = jsonDoc2.object();
-
-					for (int i = ui->listWidget_talk->count() - 1; i >= 0; i--)
+					if (delflag)
 					{
-						int delflag = 1;
-						for (int j = 0; j < sub2Array.size(); j++)
-						{
-							if (sub2Array.at(j).toString() == ui->listWidget_talk->item(i)->whatsThis())
-							{
-								delflag = 0;
-								break;
-							}
-						}
-						if (delflag)
-						{
-							ui->listWidget_talk->takeItem(i);	//删除该行
-						}
-
+						ui->listWidget_talk->takeItem(i);	//删除该行
 					}
+
 				}
 			}
-			//解析结束
+		}
+		//解析结束
 
 
-			CGlobal::flag = 2;
+		CGlobal::flag = 2;
 
-			break;
+		break;
+	}
+
+	case 2:
+	{
+		curRow = ui->listWidget_char->currentRow();
+
+		if (!(ui->listWidget_char->item(curRow)->flags() & (Qt::ItemIsSelectable)))
+		{
+			//qDebug() << "Can not select";
+			return;
 		}
 
-		case 2:
+		CGlobal::curid_3 = ui->listWidget_char->item(curRow)->whatsThis();
+
+		fileName = "resource/image/" + CGlobal::curid_3 + ".png";
+		QImage* img = new QImage;
+		if (!(img->load(fileName)))
 		{
-			curRow = ui->listWidget_char->currentRow();
+			//qDebug() << "Load failed";
+			delete img;
+			return;
+		}
+		QGraphicsScene *scene = new QGraphicsScene;
+		scene->addPixmap(QPixmap::fromImage(*img).scaled(90, 90));
+		ui->graphicsView_char_3->setScene(scene);
 
-			if (!(ui->listWidget_char->item(curRow)->flags() & (Qt::ItemIsSelectable)))
-			{
-				//qDebug() << "Can not select";
-				return;
-			}
+		//解析json
+		//读取json1
+		QFile loadFile("resource/json/jsonChara.json");
 
-			CGlobal::curid_3 = ui->listWidget_char->item(curRow)->whatsThis();
+		if (!loadFile.open(QIODevice::ReadOnly))
+		{
+			//qDebug() << "could't open projects json";
+			return;
+		}
 
-			fileName = "resource/image/" + CGlobal::curid_3 + ".png";
-			QImage* img = new QImage;
-			if (!(img->load(fileName)))
-			{
-				//qDebug() << "Load failed";
-				delete img;
-				return;
-			}
-			QGraphicsScene *scene = new QGraphicsScene;
-			scene->addPixmap(QPixmap::fromImage(*img).scaled(90, 90));
-			ui->graphicsView_char_3->setScene(scene);
+		QByteArray allData = loadFile.readAll();
+		loadFile.close();
 
-			//解析json
-			//读取json1
-			QFile loadFile("resource/json/jsonChara.json");
+		QJsonParseError json_error;
+		QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &json_error));
 
-			if (!loadFile.open(QIODevice::ReadOnly))
+		if (json_error.error != QJsonParseError::NoError)
+		{
+			//qDebug() << "json error!";
+			return;
+		}
+
+		QJsonObject rootObj = jsonDoc.object();
+
+		QStringList keys = rootObj.keys();
+
+		//开始处理json数据
+		if (rootObj.contains(CGlobal::curid_3))
+		{
+			QJsonObject subObj = rootObj.value(CGlobal::curid_3).toObject();	//读取当前角色的数据
+
+			//读取json2
+			QFile loadFile2("resource/json/jsonDialogue.json");
+
+			if (!loadFile2.open(QIODevice::ReadOnly))
 			{
 				//qDebug() << "could't open projects json";
 				return;
 			}
 
-			QByteArray allData = loadFile.readAll();
-			loadFile.close();
+			QByteArray allData2 = loadFile2.readAll();
+			loadFile2.close();
 
-			QJsonParseError json_error;
-			QJsonDocument jsonDoc(QJsonDocument::fromJson(allData, &json_error));
+			QJsonParseError json_error2;
+			QJsonDocument jsonDoc2(QJsonDocument::fromJson(allData2, &json_error2));
 
-			if (json_error.error != QJsonParseError::NoError)
+			if (json_error2.error != QJsonParseError::NoError)
 			{
 				//qDebug() << "json error!";
 				return;
 			}
 
-			QJsonObject rootObj = jsonDoc.object();
-
-			QStringList keys = rootObj.keys();
-
-			//开始处理json数据
-			if (rootObj.contains(CGlobal::curid_3))
+			//删除当前不可进行的对话组
+			if (subObj.contains("includedPattern"))
 			{
-				QJsonObject subObj = rootObj.value(CGlobal::curid_3).toObject();	//读取当前角色的数据
+				QJsonArray sub2Array = subObj.value("includedPattern").toArray();		//当前角色所包含的对话，删除不包含的listwidget中的项
+				QJsonObject rootObj2 = jsonDoc2.object();
 
-				//读取json2
-				QFile loadFile2("resource/json/jsonDialogue.json");
-
-				if (!loadFile2.open(QIODevice::ReadOnly))
+				for (int i = ui->listWidget_talk->count() - 1; i >= 0; i--)
 				{
-					//qDebug() << "could't open projects json";
-					return;
-				}
-
-				QByteArray allData2 = loadFile2.readAll();
-				loadFile2.close();
-
-				QJsonParseError json_error2;
-				QJsonDocument jsonDoc2(QJsonDocument::fromJson(allData2, &json_error2));
-
-				if (json_error2.error != QJsonParseError::NoError)
-				{
-					//qDebug() << "json error!";
-					return;
-				}
-
-				//删除当前不可进行的对话组
-				if (subObj.contains("includedPattern"))
-				{
-					QJsonArray sub2Array = subObj.value("includedPattern").toArray();		//当前角色所包含的对话，删除不包含的listwidget中的项
-					QJsonObject rootObj2 = jsonDoc2.object();
-
-					for (int i = ui->listWidget_talk->count() - 1; i >= 0; i--)
+					int delflag = 1;
+					for (int j = 0; j < sub2Array.size(); j++)
 					{
-						int delflag = 1;
-						for (int j = 0; j < sub2Array.size(); j++)
+						if (sub2Array.at(j).toString() == ui->listWidget_talk->item(i)->whatsThis())
 						{
-							if (sub2Array.at(j).toString() == ui->listWidget_talk->item(i)->whatsThis())
-							{
-								delflag = 0;
-								break;
-							}
+							delflag = 0;
+							break;
 						}
-						if (delflag)
-						{
-							ui->listWidget_talk->takeItem(i);	//删除该行
-						}
-
 					}
+					if (delflag)
+					{
+						ui->listWidget_talk->takeItem(i);	//删除该行
+					}
+
 				}
 			}
-			//解析结束
-
-			CGlobal::flag = 3;	//不可继续选取
-			break;
 		}
+		//解析结束
 
-		default:
-		{
-			break;
-		}
+		CGlobal::flag = 3;	//不可继续选取
+		break;
+	}
+
+	default:
+	{
+		break;
+	}
 			
 	}
 	
@@ -1055,10 +1127,31 @@ void MainWindow::on_listWidget_talk_clicked(const QModelIndex &index)
 					playlist.tracks[i].setName(talkText);
 				}
 			}
+
+			updateList();
+
+			for (int i = 0; i < sub2keys2.size(); i++)
+			{
+				if (textObj.contains(sub2keys2.at(i)))
+				{
+
+					QJsonObject sub3Obj2 = textObj.value(sub2keys2.at(i)).toObject();
+
+					if (ui->radioButton_CN->isChecked())
+					{
+						ui->listWidget->item(i)->setToolTip(sub3Obj2["JP"].toString());
+					}
+					else
+					{
+						ui->listWidget->item(i)->setToolTip(sub3Obj2["CN"].toString());
+					}
+					
+				}
+			}			
 		}
 	}
 
-	updateList();
+	
 	//音频加载结束
 
 	lCounter = 0;

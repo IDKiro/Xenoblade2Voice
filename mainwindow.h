@@ -70,7 +70,7 @@ private:
 
 	void resetTalklist();
 
-    bool repeat = false;
+    int repeat = 0;
 
     bool muted = false;
 
