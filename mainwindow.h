@@ -2,13 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "playlist.h"
 #include <QtMultimedia/QMediaPlayer>
 #include "QTimer"
 #include "QPalette"
 #include "vector"
 #include "QKeyEvent"
 #include "QLineEdit"
+#include "playlist.h"
 
 using namespace std;
 
@@ -25,10 +25,10 @@ public:
     ~MainWindow();
 
 private slots:
-    //void on_add_clicked();
+	void on_pushButton_close_clicked();
 
-    //void on_remove_clicked();
-
+	void on_pushButton_min_clicked();
+	
 	void on_repeat_clicked();
 
     void on_play_clicked();
@@ -58,6 +58,8 @@ private slots:
 	void on_listWidget_talk_clicked(const QModelIndex &index);
 
 private:
+	void initSetting();
+
     void updateList();
 
     void loadTrack();

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>896</width>
-    <height>561</height>
+    <height>591</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -660,7 +660,7 @@ border-color:#E4E4E4;
     <property name="geometry">
      <rect>
       <x>515</x>
-      <y>420</y>
+      <y>450</y>
       <width>371</width>
       <height>131</height>
      </rect>
@@ -696,7 +696,7 @@ border-color:#E4E4E4;
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>30</y>
       <width>512</width>
       <height>200</height>
      </rect>
@@ -718,9 +718,9 @@ border-color:#E4E4E4;
     <property name="geometry">
      <rect>
       <x>510</x>
-      <y>50</y>
+      <y>80</y>
       <width>191</width>
-      <height>51</height>
+      <height>56</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -838,7 +838,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>730</x>
-      <y>50</y>
+      <y>80</y>
       <width>141</width>
       <height>51</height>
      </rect>
@@ -911,7 +911,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>210</y>
+      <y>240</y>
       <width>496</width>
       <height>341</height>
      </rect>
@@ -965,7 +965,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>515</x>
-      <y>110</y>
+      <y>140</y>
       <width>91</width>
       <height>91</height>
      </rect>
@@ -987,7 +987,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>615</x>
-      <y>110</y>
+      <y>140</y>
       <width>91</width>
       <height>91</height>
      </rect>
@@ -1009,7 +1009,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>715</x>
-      <y>110</y>
+      <y>140</y>
       <width>91</width>
       <height>91</height>
      </rect>
@@ -1031,7 +1031,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>815</x>
-      <y>110</y>
+      <y>140</y>
       <width>71</width>
       <height>56</height>
      </rect>
@@ -1073,7 +1073,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>815</x>
-      <y>170</y>
+      <y>200</y>
       <width>71</width>
       <height>31</height>
      </rect>
@@ -1086,7 +1086,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>510</x>
-      <y>10</y>
+      <y>40</y>
       <width>371</width>
       <height>42</height>
      </rect>
@@ -1117,7 +1117,7 @@ background-color: rgba(255, 255, 255, 0);</string>
     <property name="geometry">
      <rect>
       <x>515</x>
-      <y>210</y>
+      <y>240</y>
       <width>371</width>
       <height>201</height>
      </rect>
@@ -1150,6 +1150,109 @@ background-color: rgba(255, 255, 255, 0);</string>
     </property>
     <property name="currentRow">
      <number>-1</number>
+    </property>
+   </widget>
+   <widget class="FrameTitleBar" name="frame_title">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>896</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgba(255, 255, 255, 0);</string>
+    </property>
+    <widget class="QPushButton" name="pushButton_close">
+     <property name="geometry">
+      <rect>
+       <x>866</x>
+       <y>0</y>
+       <width>30</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+border-color: rgba(255, 255, 255, 0);
+background-color: rgba(255, 255, 255, 0);
+}
+
+QPushButton:hover {
+border-color: rgba(255, 255, 255, 0);
+background-color: rgb(255, 63, 63);
+}
+
+QPushButton:pressed {
+border-color: rgba(255, 255, 255, 0);
+background-color: rgb(255, 63, 63);
+}
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>resource/icon/close.png</normaloff>resource/icon/close.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>16</width>
+       <height>16</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_min">
+     <property name="geometry">
+      <rect>
+       <x>836</x>
+       <y>0</y>
+       <width>30</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+border-color: rgba(255, 255, 255, 0);
+background-color: rgba(255, 255, 255, 0);
+}
+
+QPushButton:hover {
+border-color: rgba(255, 255, 255, 0);
+background-color: rgba(0, 0, 0, 31);
+}
+
+QPushButton:pressed {
+border-color: rgba(255, 255, 255, 0);
+background-color: rgba(0, 0, 0, 31);
+}
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>resource/icon/minus.png</normaloff>resource/icon/minus.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>16</width>
+       <height>16</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>790</y>
+      <width>120</width>
+      <height>80</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -1210,6 +1313,14 @@ background-color: rgba(255, 255, 255, 0);</string>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>FrameTitleBar</class>
+   <extends>QFrame</extends>
+   <header>frametitlebar.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
  <slots>

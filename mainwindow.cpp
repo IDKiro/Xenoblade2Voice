@@ -26,7 +26,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     this->setFixedSize(this->geometry().width(),this->geometry().height());
+	this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint);
 
+	initSetting();
+}
+
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::initSetting()
+{
 	QString fileName;
 	QString staff;
 	if (ui->radioButton_CN->isChecked())
@@ -88,7 +100,7 @@ MainWindow::MainWindow(QWidget *parent) :
 		if (rootObj.contains(keys.at(i)))
 		{
 			fileName = "resource/image/" + keys.at(i) + ".png";									//fileName已经定义过，直接使用
-			//qDebug() << fileName;
+																								//qDebug() << fileName;
 			QJsonObject subObj = rootObj.value(keys.at(i)).toObject();
 			if (subObj.contains("name"))
 			{
@@ -123,48 +135,27 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	connect(updater, SIGNAL(timeout()), this, SLOT(update()));
 
-    player->setVolume(100);
+	player->setVolume(100);
 
-    ui->listWidget->setCurrentRow(0);
+	ui->listWidget->setCurrentRow(0);
 
-	
-    if(ui->listWidget->count() != 0){
-        loadTrack();
-        player->pause();
-        updater->start();
-    }
+
+	if (ui->listWidget->count() != 0) {
+		loadTrack();
+		player->pause();
+		updater->start();
+	}
 }
 
-
-MainWindow::~MainWindow()
+void MainWindow::on_pushButton_close_clicked()
 {
-    delete ui;
+	close();
 }
 
-/*
-void MainWindow::on_add_clicked()
-{   
-	bool startUpdater = false;if(ui->listWidget->count() == 0) startUpdater = true;
-    QStringList files = QFileDialog::getOpenFileNames(this, tr("Select Music Files"));
-    if(!files.empty())
-    {
-        playlist.add(files);
-        updateList();
-        if(startUpdater) updater->start();
-    }
-}
-
-void MainWindow::on_remove_clicked()
+void MainWindow::on_pushButton_min_clicked()
 {
-    int index = getIndex();
-    if(index != -1)
-    {
-       playlist.remove(index);
-       updateList();
-       ui->listWidget->setCurrentRow(index);
-    }
+	showMinimized();
 }
-*/
 
 void MainWindow::on_repeat_clicked()
 {

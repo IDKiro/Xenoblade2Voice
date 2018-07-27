@@ -52,6 +52,9 @@
     <ClCompile Include="cglobal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="frametitlebar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mainwindow.h">
@@ -84,10 +87,13 @@
     <ClInclude Include="cglobal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Generated Files</Filter>
+    <ClInclude Include="frametitlebar.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
