@@ -4,6 +4,8 @@
 
 根据选择的人物筛选并播放相关角色的战斗后语音
 
+![](https://github.com/IDKiro/Xenoblade2Voice/blob/master/image/step1.png)
+
 ## Feature
 
 1. 切换中文/日文
