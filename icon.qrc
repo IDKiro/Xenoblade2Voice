@@ -1,0 +1,19 @@
+<RCC>
+  <qresource prefix="icon">
+    <file>assets/icon/SliderLeft.png</file>
+    <file>assets/icon/SliderRight.png</file>
+    <file>assets/icon/close.png</file>
+    <file>assets/icon/icon.ico</file>
+    <file>assets/icon/icon.png</file>
+    <file>assets/icon/minus.png</file>
+    <file>assets/icon/mute.png</file>
+    <file>assets/icon/next.png</file>
+    <file>assets/icon/pause.png</file>
+    <file>assets/icon/play.png</file>
+    <file>assets/icon/previous.png</file>
+    <file>assets/icon/reorder.png</file>
+    <file>assets/icon/repeat.png</file>
+    <file>assets/icon/repeat_one.png</file>
+    <file>assets/icon/volume.png</file>
+  </qresource>
+</RCC>

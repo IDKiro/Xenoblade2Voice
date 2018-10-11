@@ -35,6 +35,11 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -101,6 +106,101 @@
     <ResourceCompile Include="xb2voice.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resource\icon\icon.ico" />
+    <Image Include="assets\icon\icon.ico" />
+    <Image Include="assets\icon\add_bottom.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\add_left.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\add_right.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\add_top.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\branch_close.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\branch_open.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\calendar_nextmonth.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\calendar_prevmonth.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\checkbox_checked.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\checkbox_checked_disable.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\checkbox_parcial.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\checkbox_parcial_disable.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\checkbox_unchecked.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\checkbox_unchecked_disable.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\close.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\minus.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\mute.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\next.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\pause.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\play.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\previous.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\radiobutton_checked.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\radiobutton_checked_disable.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\radiobutton_unchecked.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\radiobutton_unchecked_disable.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\reorder.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\repeat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\repeat_one.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\icon\volume.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="icon.qrc">
+      <Filter>Form Files</Filter>
+    </QtRcc>
   </ItemGroup>
 </Project>

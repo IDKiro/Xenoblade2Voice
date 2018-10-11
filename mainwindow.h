@@ -25,6 +25,8 @@ public:
     ~MainWindow();
 
 private slots:
+    void update();
+
 	void on_pushButton_close_clicked();
 
 	void on_pushButton_min_clicked();
@@ -37,7 +39,7 @@ private slots:
 
     void on_seekBar_sliderMoved(int position);
 
-    void on_listWidget_doubleClicked(const QModelIndex &index);
+    void on_listWidget_doubleClicked();
 
     void on_forward_clicked();
 
@@ -45,17 +47,17 @@ private slots:
 
     void on_mute_clicked();
 
-	void on_reset_clicked();
+	void on_radioButton_lang_clicked();
 
-    void update();
+	void on_listWidget_char_clicked();
 
-	void on_radioButton_CN_clicked();
+	void on_listWidget_talk_clicked();
 
-	void on_radioButton_JP_clicked();
+	void on_pushButton_char_1_clicked();
 
-	void on_listWidget_char_clicked(const QModelIndex &index);
+	void on_pushButton_char_2_clicked();
 
-	void on_listWidget_talk_clicked(const QModelIndex &index);
+	void on_pushButton_char_3_clicked();
 
 private:
 	void initSetting();
@@ -71,6 +73,18 @@ private:
     int getIndex();
 
 	void resetTalklist();
+
+	void resetSelect();
+
+	void selectCN();
+
+	void selectJP();
+
+    void char_1_selected();
+
+    void char_2_selected();
+
+    void char_3_selected();
 
     int repeat = 0;
 
