@@ -21,7 +21,7 @@ Version 1.0:
 
 ## Usage
 
-在发布应用页面进行下载，可以分别下载单可执行文件、单资源文件压缩包，或者直接下载整合压缩包：
+在发布应用页面进行下载，分别下载可执行文件、资源文件压缩包：
 
 [https://github.com/IDKiro/Xenoblade2Voice/releases](https://github.com/IDKiro/Xenoblade2Voice/releases)
 
