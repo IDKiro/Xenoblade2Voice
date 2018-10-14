@@ -1345,9 +1345,7 @@ QRadioButton ,QCheckBox{
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="icon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
  <slots>
   <slot>on_listWidget_char_clicked()</slot>

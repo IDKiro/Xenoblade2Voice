@@ -12,6 +12,7 @@ version 1.1:
 
 1. DLC 内容（暂不包括黄金国）
 2. 优化切换语言和清除选择的方式
+3. 更换编译方式，缩小程序体积，支持32位系统
 
 Version 1.0: 
 
@@ -63,11 +64,13 @@ Version 1.0:
 
 1. 悬停在标题上可以查看本程序的staff
 
-## Development tools:
+## Development:
 
 Qt 5.9.3
 
 Visual Studio 2017
+
+TIP: 提供了 VS 和 QTCreator 的工程文件，QTCreator 的编译结果出现乱码是因为 `mainwindow.cpp` 为 unicode 编码，自行转换为 UTF8 即可在 QTCreator 上编译。
 
 ## Developer
 
