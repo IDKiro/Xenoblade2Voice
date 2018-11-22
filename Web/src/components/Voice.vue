@@ -1,6 +1,6 @@
 <template>
   <Layout style="max-width: 1000px; margin: 0 auto;">
-    <Sider class="sidebar" width="411">
+    <Sider class="sidebar" width="411" style="background: #fff">
       <vue-scroll>
         <CharacterSelector/>
       </vue-scroll>
@@ -67,6 +67,18 @@ export default {
   },
   mounted () {
     this.adjustH()
+  },
+  computed: {
+    playListLength () {
+      return this.$store.getters.playList.length
+    }
+  },
+  watch: {
+    playListLength () {
+      this.$nextTick(() => {
+        this.adjustH()
+      })
+    }
   }
 }
 </script>
@@ -74,7 +86,6 @@ export default {
 <style lang="scss">
   .sidebar {
     height: 100vh;
-    background: #fff;
     margin-right: 5px;
     box-shadow: 2px 0 2px rgba(0, 0, 0, .15);
   }
