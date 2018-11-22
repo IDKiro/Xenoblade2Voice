@@ -21,8 +21,6 @@ export default {
       }
     }
   },
-
   methods: mapMutations(['setLanguage'])
-
 }
 </script>

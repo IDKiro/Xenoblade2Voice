@@ -37,7 +37,6 @@ export default {
         })
     }
   },
-
   methods: {
     ...mapMutations(['setPattern']),
     select (rowData) {

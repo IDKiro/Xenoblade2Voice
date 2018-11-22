@@ -33,35 +33,27 @@ export default {
 <style lang="scss">
 .scroll {
   height: 100%;
-
   overflow: auto;
-
   img {
     width: 90px;
     box-shadow:2px 2px 5px #333333;
   }
-
   .card-body {
     padding: 0.5rem;
     text-align: center;
     overflow: hidden;
     font-size: 12px;
   }
-
   ul {
     list-style-type: none;
     padding: 0;
   }
-
   li {
     display: inline-block;
   }
-
   .ivu-btn {
     padding: 0;
     margin: 4px;
   }
-
 }
-
 </style>

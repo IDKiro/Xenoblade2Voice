@@ -12,19 +12,15 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-
   props: [
     'buttonSize'
   ],
-
   data () {
     return {
       box: [0, 1, 2]
     }
   },
-
   computed: mapGetters(['charaBoxList']),
-
   methods: {
     ...mapMutations([
       'removeSelectedChara'

@@ -4,6 +4,8 @@
 
 ## Build Setup
 
+`static/vue-aplayer.min.js` is necessary to replace the file with the same name in `node_modules`
+
 ``` bash
 # install dependencies
 npm install
