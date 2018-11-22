@@ -8,18 +8,26 @@
 
 ## Update
 
-version 1.2:
+version 1.1.1:
 
-1. DLC-黄金国的内容
-2. 增加程序版本，包括网页版、安卓版和微信小程序版
+1. 增加[移动端网页版](http://xb2.idkiro.xyz/)
+2. PC端直接访问[乐园数据管理室](http://xenoblade2.cn/%E6%88%98%E5%90%8E%E5%AF%B9%E8%AF%9D)
 
-version 1.1:
+PS：黄金国的内容暂时坑了，这次更新只是移动端开发的一个尝试
+
+Thanks to: [luminisward/Xenoblade2Voice-Vue](https://github.com/luminisward/Xenoblade2Voice-Vue)
+
+<div align="center">
+  <img src="image/qrcode.png">
+</div>
+
+version 1.1.0:
 
 1. DLC 内容（暂不包括黄金国）
 2. 优化切换语言和清除选择的方式
 3. 更换编译方式，缩小程序体积，支持32位系统
 
-Version 1.0: 
+Version 1.0.0: 
 
 1. 自定义标题栏
 2. bug 修复
@@ -71,11 +79,19 @@ Version 1.0:
 
 ## Development:
 
+### Desktop
+
 Qt 5.9.3
 
 Visual Studio 2017
 
 TIP: 提供了 VS 和 QTCreator 的工程文件，QTCreator 的编译结果出现乱码是因为 `mainwindow.cpp` 为 unicode 编码，自行转换为 UTF8 即可在 QTCreator 上编译。
+
+### Web
+
+Vue.js 2.5.2
+
+Webstorm 2018.2
 
 ## Developer
 
