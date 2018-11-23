@@ -21,6 +21,7 @@
 version 1.1.2:
 
 1. 增加了基于 Electron 的桌面端
+2. 模块化项目
 
 PS: 可执行文件文件体积太大，暂不进行发布
 
@@ -98,6 +99,12 @@ TIP: 提供了 VS 和 QTCreator 的工程文件，QTCreator 的编译结果出�
 Vue.js 2.5.2
 
 Webstorm 2018.2
+
+### Electron
+
+Electron 2.0.4
+
+VSCode 1.29
 
 ## Developer
 
