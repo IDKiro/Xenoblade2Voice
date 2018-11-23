@@ -1,0 +1,3 @@
+[submodule "Web"]
+	path = Web
+	url = https://github.com/IDKiro/Xenoblade2Voice-Web.git
