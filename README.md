@@ -6,7 +6,23 @@
 
 ![](/image/main.gif)
 
+## Usage
+
+在发布应用页面进行下载，分别下载可执行文件、资源文件压缩包：
+
+[https://github.com/IDKiro/Xenoblade2Voice/releases](https://github.com/IDKiro/Xenoblade2Voice/releases)
+
+下载后将可执行文件(.exe)和资源文件(asset文件夹)放在同一目录下即可打开可执行文件(.exe)进行使用：
+
+![](/image/file.png)
+
 ## Update
+
+version 1.1.2:
+
+1. 增加了基于 Electron 的桌面端
+
+PS: 可执行文件文件体积太大，暂不进行发布
 
 version 1.1.1:
 
@@ -31,16 +47,6 @@ Version 1.0.0:
 
 1. 自定义标题栏
 2. bug 修复
-
-## Usage
-
-在发布应用页面进行下载，分别下载可执行文件、资源文件压缩包：
-
-[https://github.com/IDKiro/Xenoblade2Voice/releases](https://github.com/IDKiro/Xenoblade2Voice/releases)
-
-下载后将可执行文件(.exe)和资源文件(asset文件夹)放在同一目录下即可打开可执行文件(.exe)进行使用：
-
-![](/image/file.png)
 
 ## Feature
 
