@@ -4,3 +4,6 @@
 [submodule "Desktop"]
 	path = Desktop
 	url = https://github.com/IDKiro/Xenoblade2Voice-Desktop
+[submodule "Electron"]
+	path = Electron
+	url = https://github.com/IDKiro/Xenoblade2Voice-Electron.git
