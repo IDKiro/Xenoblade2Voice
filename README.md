@@ -8,6 +8,8 @@
 
 ## Usage
 
+### Win 桌面版
+
 在发布应用页面进行下载，分别下载可执行文件、资源文件压缩包：
 
 [https://github.com/IDKiro/Xenoblade2Voice/releases](https://github.com/IDKiro/Xenoblade2Voice/releases)
@@ -15,6 +17,16 @@
 下载后将可执行文件(.exe)和资源文件(asset文件夹)放在同一目录下即可打开可执行文件(.exe)进行使用：
 
 ![](/image/file.png)
+
+#### 网页版
+
+PC直接 [点击跳转](http://xb2.idkiro.xyz/)
+
+手机扫描二维码：
+
+<div align="center">
+  <img src="image/qrcode.png">
+</div>
 
 ## Update
 
@@ -33,10 +45,6 @@ version 1.1.1:
 PS：黄金国的内容暂时坑了，这次更新只是移动端开发的一个尝试
 
 Thanks to: [luminisward/Xenoblade2Voice-Vue](https://github.com/luminisward/Xenoblade2Voice-Vue)
-
-<div align="center">
-  <img src="image/qrcode.png">
-</div>
 
 version 1.1.0:
 
