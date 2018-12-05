@@ -10,15 +10,17 @@
 
 ### Win 桌面版
 
-在发布应用页面进行下载，分别下载可执行文件、资源文件压缩包：
+在发布应用页面进行下载，下载包含可执行文件和资源文件的压缩包：
 
 [https://github.com/IDKiro/Xenoblade2Voice/releases](https://github.com/IDKiro/Xenoblade2Voice/releases)
 
-下载后将可执行文件(.exe)和资源文件(asset文件夹)放在同一目录下即可打开可执行文件(.exe)进行使用：
+或者直接[点此下载](https://github.com/IDKiro/Xenoblade2Voice/releases/download/1.2.0/Xenoblade2Voice.zip)
+
+PS：可执行文件(.exe)和资源文件(asset文件夹)必须放在同一目录下才可以进行使用：
 
 ![](/image/file.png)
 
-### 网页版
+### 网页版（黄金国部分暂未更新）
 
 PC直接 [点击跳转](http://xb2.idkiro.xyz/)
 
@@ -29,6 +31,11 @@ PC直接 [点击跳转](http://xb2.idkiro.xyz/)
 </div>
 
 ## Update
+
+version 1.2.0:
+
+1. 更新大型 DLC 黄金国部分的内容
+2. 更新 Desktop 版本的程序
 
 version 1.1.2:
 
@@ -60,13 +67,14 @@ Version 1.0.0:
 ## Feature
 
 1. 切换中文/日文
-2. 悬停在选项上可直接显示另一语言的文本
-3. 点击角色头像选择最多三个角色
-4. 点击已选人物头像取消选择
-5. 筛选选择角色的相关对话组
-6. 播放对话组内的所有对话并显示相应的文本
-7. 双击文本可以播放该文本的语音
-8. 支持常见的播放器操作
+2. 切换本篇/黄金国
+3. 悬停在选项上可直接显示另一语言的文本
+4. 点击角色头像选择最多三个角色
+5. 点击已选人物头像取消选择
+6. 筛选选择角色的相关对话组
+7. 播放对话组内的所有对话并显示相应的文本
+8. 双击文本可以播放该文本的语音
+9. 支持常见的播放器操作
 
 ## Instruction
 
@@ -98,9 +106,9 @@ Version 1.0.0:
 
 Qt 5.9.3
 
-Visual Studio 2017
+VSCode 1.29
 
-TIP: 提供了 VS 和 QTCreator 的工程文件，QTCreator 的编译结果出现乱码是因为 `mainwindow.cpp` 为 unicode 编码，自行转换为 UTF8 即可在 QTCreator 上编译。
+TIP: VS 的工程文件在采取静态编译之后已经删除。
 
 ### Web
 
