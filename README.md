@@ -20,7 +20,7 @@ PS：可执行文件(.exe)和资源文件(asset文件夹)必须放在同一目�
 
 ![](/image/file.png)
 
-### 网页版（黄金国部分暂未更新）
+### 网页版
 
 PC直接 [点击跳转](http://xb2.idkiro.xyz/)
 
@@ -36,6 +36,7 @@ version 1.2.0:
 
 1. 更新大型 DLC 黄金国部分的内容
 2. 更新 Desktop 版本的程序
+3. 更新 Web 版本的程序
 
 version 1.1.2:
 
